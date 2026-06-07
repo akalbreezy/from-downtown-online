@@ -8,6 +8,9 @@
     "start": "node src/index.js",
     "dev": "node --watch src/index.js"
   },
+  "engines": {
+    "node": "20"
+  },
   "dependencies": {
     "@colyseus/core": "^0.15.0",
     "@colyseus/schema": "^2.0.0",
