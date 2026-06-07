@@ -3,8 +3,10 @@
 //  Clients send INTENTS only; the server validates every move
 //  against the real data and broadcasts official state.
 // ============================================================
-import { Room } from "colyseus";
-import { Schema, MapSchema, ArraySchema, type } from "@colyseus/schema";
+import colyseuspkg from "colyseus";
+const { Room } = colyseuspkg;
+import schemapkg from "@colyseus/schema";
+const { Schema, MapSchema, ArraySchema, type } = schemapkg;
 import { LEAGUES, pairKey, median } from "./data.js";
 
 const CHAIN_BASE = 24, CHAIN_BLOCK = 12;

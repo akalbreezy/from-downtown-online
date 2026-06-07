@@ -4,9 +4,12 @@
 import http from "http";
 import express from "express";
 import cors from "cors";
-import { Server } from "colyseus";
-import { WebSocketTransport } from "@colyseus/ws-transport";
-import { monitor } from "@colyseus/monitor";
+import colyseuspkg from "colyseus";
+const { Server } = colyseuspkg;
+import wstpkg from "@colyseus/ws-transport";
+const { WebSocketTransport } = wstpkg;
+import monitorpkg from "@colyseus/monitor";
+const { monitor } = monitorpkg;
 import { GameRoom } from "./GameRoom.js";
 import { buildPlayerIndex, hasKey } from "./balldontlie.js";
 import { LEAGUES } from "./data.js";
