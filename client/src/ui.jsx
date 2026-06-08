@@ -78,6 +78,51 @@ export function Style() {
     .w-stagger>*:nth-child(3){animation-delay:.23s}
     .w-pop:hover:not(:disabled){transform:translateY(-4px);}
     .w-tile:hover:not(:disabled){border-color:var(--orange)!important;box-shadow:0 0 0 1px var(--orange),0 18px 50px -12px var(--glowO)!important;}
+
+    /* ---- MOBILE ---- */
+    @media(max-width:680px){
+      /* home screen: stack hero + card vertically */
+      .w-home{grid-template-columns:1fr!important;gap:24px!important;}
+      /* broadcast layout: score rail on top, full width */
+      .w-broadcast{grid-template-columns:1fr!important;gap:12px!important;}
+      /* score rail: horizontal strip instead of sidebar */
+      .w-rail{position:static!important;flex-direction:row!important;gap:8px!important;}
+      .w-scoreboard{width:100%!important;}
+      .w-score-rows{display:flex!important;gap:8px!important;}
+      .w-score-row{flex:1!important;margin-bottom:0!important;}
+      .w-score-num{font-size:22px!important;}
+      /* mode grid: 2 cols instead of 4 */
+      .w-mode-grid{grid-template-columns:1fr 1fr!important;}
+      /* league row wraps */
+      .w-league-row{flex-wrap:wrap!important;}
+      /* answer grid: single column */
+      .w-answer-grid{grid-template-columns:1fr!important;}
+      /* dart scores: stack */
+      .w-dart-scores{flex-direction:column!important;}
+      /* lifeline grid stays row but smaller */
+      .w-lifeline-grid button{padding:8px 4px!important;}
+      /* chain history max height */
+      .w-chain-history{max-height:160px!important;}
+      /* stage padding */
+      .w-stage{padding:16px 14px!important;}
+      /* topbar smaller */
+      .w-topbar{padding:10px 16px!important;}
+      /* share bar wraps */
+      .w-share-bar{flex-wrap:wrap!important;}
+      .w-share-input{min-width:0!important;width:100%!important;}
+      /* guess row stacks */
+      .w-guess-row{flex-direction:column!important;}
+      .w-guess-row input{width:100%!important;}
+      .w-guess-row button{width:100%!important;}
+      /* end card padding */
+      .w-end-card,.w-wait-card,.w-join-card{padding:24px 18px!important;}
+      /* final scores smaller */
+      .w-final-score{font-size:40px!important;}
+      /* chain clock smaller */
+      .w-chain-clock{font-size:48px!important;}
+      /* big titles scale down */
+      .w-handoff-name{font-size:32px!important;}
+    }
   `}</style>);
 }
 

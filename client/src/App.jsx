@@ -17,12 +17,12 @@ export default function App() {
     <div style={W.root}>
       <Style />
       <div style={W.floor} />
-      <header style={W.topbar}>
+      <header style={W.topbar} className="w-topbar">
         <span style={W.brandFrom}>FROM</span>
         <span style={W.brandDown}>DOWNTOWN</span>
         <span style={W.brandTag}>ONLINE · HEAD-TO-HEAD</span>
       </header>
-      <div style={W.stage}>
+      <div style={W.stage} className="w-stage">
         {status !== "connected" && <Lobby room={room} linkId={linkId} />}
         {status === "connected" && state && (
           <Game room={room} state={state} seat={seat} roomId={roomId} />
@@ -45,7 +45,7 @@ function Lobby({ room, linkId }) {
 
   if (mode === "home" && !linkId) {
     return (
-      <div style={W.homeWrap}>
+      <div style={W.homeWrap} className="w-home">
         <div style={W.homeLeft} className="w-stagger">
           <div style={W.heroPlate}><span style={W.heroFrom}>FROM</span><span style={W.heroDown}>DOWNTOWN</span></div>
           <p style={W.heroBlurb}>Real-time 1-v-1 basketball trivia. Create a game, send your opponent the link, and settle it live — trivia, stat line, 501, and the teammate chain.</p>
@@ -85,9 +85,9 @@ function ShareBar({ roomId }) {
   const url = `${window.location.origin}${window.location.pathname}?r=${roomId}`;
   const copy = async () => { try { await navigator.clipboard.writeText(url); setCopied(true); setTimeout(()=>setCopied(false),1500); } catch {} };
   return (
-    <div style={W.shareBar}>
+    <div style={W.shareBar} className="w-share-bar">
       <span style={W.shareLabel}>INVITE LINK</span>
-      <input style={W.shareInput} readOnly value={url} onFocus={e=>e.target.select()} />
+      <input style={W.shareInput} className="w-share-input" readOnly value={url} onFocus={e=>e.target.select()} />
       <button style={W.shareBtn} className="w-pop" onClick={copy}>{copied?"COPIED ✓":"COPY"}</button>
     </div>
   );
@@ -148,7 +148,7 @@ function LeagueAndMode({ state, seat, send, roomId }) {
       <h2 style={W.bigTitle}>{host ? "PICK LEAGUE & GAME" : "WAITING FOR HOST"}</h2>
       <p style={W.subTitle}>{host ? "You're the host — choose the league and game." : "Player 1 is choosing the league and game…"}</p>
 
-      <div style={W.leagueRow}>
+      <div style={W.leagueRow} className="w-league-row">
         {["nba","nbl"].map(k=>(
           <button key={k} className="w-pop w-tile" style={{...W.leagueCard, opacity: host?1:.6, borderColor: state.league===k?"var(--orange)":"var(--line)"}}
             disabled={!host} onClick={()=>send("pickLeague",{league:k})}>
@@ -156,7 +156,7 @@ function LeagueAndMode({ state, seat, send, roomId }) {
           </button>
         ))}
       </div>
-      <div style={W.modeGrid}>
+      <div style={W.modeGrid} className="w-mode-grid">
         {MODES.map(([id,icon,nm])=>(
           <button key={id} className="w-pop w-tile" style={{...W.modeTile, opacity:host?1:.6}} disabled={!host} onClick={()=>send("pickMode",{mode:id})}>
             <span style={W.modeIcon}>{icon}</span><span style={W.modeName}>{nm}</span>
@@ -172,13 +172,13 @@ function Trivia({ state, seat, send }) {
   const myTurn = state.turn === seat;
   const turnName = state.players.find(p=>p.seat===state.turn)?.name || `Player ${state.turn+1}`;
   return (
-    <div style={W.broadcast}>
+    <div style={W.broadcast} className="w-broadcast">
       <ScoreRail state={state} seat={seat} />
       <main style={W.mainStage}>
         {state.phase === "handoff" ? (
           <div style={W.handoff}>
             <div style={W.handoffLabel}>NOW UP</div>
-            <div style={{...W.handoffName, color: state.turn===0?"var(--orange)":"var(--teal)"}}>{turnName}</div>
+            <div style={{...W.handoffName, color: state.turn===0?"var(--orange)":"var(--teal)"}} className="w-handoff-name">{turnName}</div>
             <p style={W.subTitle}>Round {state.round+1} of {state.rounds}</p>
             {myTurn
               ? <button style={W.cta} className="w-pop" onClick={()=>send("advance")}>I'M READY →</button>
@@ -190,7 +190,7 @@ function Trivia({ state, seat, send }) {
               <span style={W.promptLabel}>TRIVIA · {myTurn?"YOUR QUESTION":`${turnName.toUpperCase()}'S QUESTION`}</span>
               <span style={W.qText}>{state.promptSub}</span>
             </div>
-            <div style={W.answerGrid}>
+            <div style={W.answerGrid} className="w-answer-grid">
               {state.answers.map((opt,i)=>{
                 let bg="var(--surface2)",bd="var(--line)",cl="var(--text)";
                 if(state.phase==="reveal" && state.correct>=0){ if(i===state.correct){bg="var(--teal)";bd="var(--teal)";cl="#04221d";} }
@@ -211,22 +211,24 @@ function Trivia({ state, seat, send }) {
 
 function ScoreRail({ state, seat }) {
   return (
-    <aside style={W.rail}>
-      <div style={W.scorebd}>
+    <aside style={W.rail} className="w-rail">
+      <div style={W.scorebd} className="w-scoreboard">
         <div style={W.scorebdHead}>SCORE · RD {Math.min(state.round+1,state.rounds)}/{state.rounds}</div>
-        {state.players.map(p=>{
-          const c = p.seat===0?"var(--orange)":"var(--teal)";
-          const up = state.turn===p.seat;
-          return (
-            <div key={p.seat} style={{...W.scoreRow, borderColor:c, opacity:up?1:.6, boxShadow:up?`0 0 0 1px ${c}`:"none"}}>
-              <div style={{flex:1}}>
-                <div style={W.scoreName}>{p.name}{p.seat===seat?" (you)":""}{!p.connected?" ⚠":""}</div>
-                <div style={{...W.scoreState,color:c}}>{up?"● ON THE CLOCK":"WAITING"}</div>
+        <div className="w-score-rows">
+          {state.players.map(p=>{
+            const c = p.seat===0?"var(--orange)":"var(--teal)";
+            const up = state.turn===p.seat;
+            return (
+              <div key={p.seat} style={{...W.scoreRow, borderColor:c, opacity:up?1:.6, boxShadow:up?`0 0 0 1px ${c}`:"none"}} className="w-score-row">
+                <div style={{flex:1}}>
+                  <div style={W.scoreName}>{p.name}{p.seat===seat?" (you)":""}{!p.connected?" ⚠":""}</div>
+                  <div style={{...W.scoreState,color:c}}>{up?"● ON THE CLOCK":"WAITING"}</div>
+                </div>
+                <div style={{...W.scoreNum,color:c}} className="w-score-num">{p.score}</div>
               </div>
-              <div style={{...W.scoreNum,color:c}}>{p.score}</div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </aside>
   );
@@ -246,13 +248,13 @@ function StatLine({ state, seat, send }) {
   };
 
   return (
-    <div style={W.broadcast}>
+    <div style={W.broadcast} className="w-broadcast">
       <ScoreRail state={state} seat={seat} />
       <main style={W.mainStage}>
         {state.phase === "handoff" ? (
           <div style={W.handoff}>
             <div style={W.handoffLabel}>NOW UP</div>
-            <div style={{...W.handoffName, color: state.turn===0?"var(--orange)":"var(--teal)"}}>{turnName}</div>
+            <div style={{...W.handoffName, color: state.turn===0?"var(--orange)":"var(--teal)"}} className="w-handoff-name">{turnName}</div>
             <p style={W.subTitle}>Round {state.round+1} of {state.rounds}</p>
             {myTurn
               ? <button style={W.cta} className="w-pop" onClick={()=>send("advance")}>I'M READY →</button>
@@ -266,7 +268,7 @@ function StatLine({ state, seat, send }) {
               <span style={W.promptStatSub}>{state.promptSub}</span>
             </div>
             {state.phase === "active" && myTurn && (
-              <div style={W.guessRow}>
+              <div style={W.guessRow} className="w-guess-row">
                 <input style={{...W.input, flex:1, marginTop:0}} type="number" placeholder="Your guess…" value={guess}
                   onChange={e=>setGuess(e.target.value)}
                   onKeyDown={e=>{ if(e.key==="Enter") submit(); }} />
@@ -305,14 +307,14 @@ function Darts({ state, seat, send }) {
   };
 
   return (
-    <div style={W.broadcast}>
+    <div style={W.broadcast} className="w-broadcast">
       <ScoreRail state={state} seat={seat} />
       <main style={W.mainStage}>
         <div style={W.prompt}>
           <span style={W.promptLabel}>501 · {state.promptSub}</span>
           <span style={W.qText}>NAME A PLAYER — THEIR STAT COUNTS DOWN</span>
         </div>
-        <div style={W.dartScores}>
+        <div style={W.dartScores} className="w-dart-scores">
           {state.players.map(p=>(
             <div key={p.seat} style={{...W.dartScoreCol, borderColor:p.seat===0?"var(--orange)":"var(--teal)", opacity:state.turn===p.seat?1:.5}}>
               <div style={W.dartName}>{p.name}{p.seat===seat?" (you)":""}</div>
@@ -327,7 +329,7 @@ function Darts({ state, seat, send }) {
           </div>
         )}
         {myTurn ? (
-          <div style={W.guessRow}>
+          <div style={W.guessRow} className="w-guess-row">
             <input style={{...W.input, flex:1, marginTop:0}} placeholder="Player name…" value={dartName}
               onChange={e=>setDartName(e.target.value)}
               onKeyDown={e=>{ if(e.key==="Enter") submit(); }} />
@@ -361,13 +363,13 @@ function Chain({ state, seat, send }) {
       <aside style={W.rail}>
         <div style={W.scorebd}>
           <div style={W.scorebdHead}>SHOT CLOCK</div>
-          <div style={{...W.chainClock, color:clockColor, textShadow:`0 0 20px ${clockColor}`}}>{state.clock}</div>
+          <div style={{...W.chainClock, color:clockColor, textShadow:`0 0 20px ${clockColor}`}} className="w-chain-clock">{state.clock}</div>
           {state.blockNext && <div style={W.blockedTag}>BLOCKED ⚡</div>}
         </div>
         {me && (
           <div style={W.scorebd}>
             <div style={W.scorebdHead}>YOUR LIFELINES</div>
-            <div style={W.lifelineGrid}>
+            <div style={W.lifelineGrid} className="w-lifeline-grid">
               {[["skip","⏭","SKIP",me.skip],["hint","💡","HINT",me.hint],["block","🚫","BLOCK",me.block]].map(([kind,icon,label,count])=>(
                 <button key={kind} style={{...W.lifeBtn, opacity:count>0&&myTurn?1:.35}} disabled={!myTurn||count<=0} className="w-pop"
                   onClick={()=>send("lifeline",{kind})}>
@@ -395,7 +397,7 @@ function Chain({ state, seat, send }) {
           </div>
         )}
         {myTurn ? (
-          <div style={W.guessRow}>
+          <div style={W.guessRow} className="w-guess-row">
             <input style={{...W.input, flex:1, marginTop:0}} placeholder="Teammate name…" value={chainInput}
               onChange={e=>setChainInput(e.target.value)}
               onKeyDown={e=>{ if(e.key==="Enter") submit(); }} />
@@ -404,7 +406,7 @@ function Chain({ state, seat, send }) {
         ) : (
           <div style={W.seatNote}>{turnName} is naming a teammate…</div>
         )}
-        <div style={W.chainHistory}>
+        <div style={W.chainHistory} className="w-chain-history">
           {[...state.chain].reverse().map((link,i)=>(
             <div key={i} style={{...W.chainLink, borderLeftColor:link.seat===0?"var(--orange)":link.seat===-1?"var(--line)":"var(--teal)"}}>
               <span style={W.chainLinkName}>{link.name}</span>
@@ -422,14 +424,14 @@ function Result({ state, seat, send }) {
   const youWon = win === seat;
   return (
     <div style={W.centerCol}>
-      <div style={W.endCard}>
+      <div style={W.endCard} className="w-end-card">
         <div style={W.endKick}>🏆 FINAL</div>
         <h2 style={W.chainTitle}>{win<0?"TIE GAME":(youWon?"YOU WIN":`${state.players.find(p=>p.seat===win)?.name} WINS`)}</h2>
         <div style={W.finalRow}>
           {state.players.map(p=>(
             <div key={p.seat} style={{...W.finalCol, color:p.seat===0?"var(--orange)":"var(--teal)"}}>
               <span style={W.finalName}>{p.name}</span>
-              <span style={W.finalScore}>{p.score}</span>
+              <span style={W.finalScore} className="w-final-score">{p.score}</span>
             </div>
           ))}
         </div>
