@@ -3,6 +3,58 @@ import React from "react";
 // ============================================================
 //  UI — dark broadcast look (shared styles + Style block)
 // ============================================================
+// Full NBA court SVG — used as a fixed background watermark
+const COURT_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 500" fill="none" stroke="rgba(80,130,200,0.18)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- outer boundary -->
+  <rect x="10" y="10" width="920" height="480" rx="6"/>
+  <!-- half-court line -->
+  <line x1="470" y1="10" x2="470" y2="490"/>
+  <!-- centre circle -->
+  <circle cx="470" cy="250" r="60"/>
+  <circle cx="470" cy="250" r="6" fill="rgba(80,130,200,0.18)" stroke="none"/>
+
+  <!-- LEFT key (paint) -->
+  <rect x="10" y="178" width="190" height="144"/>
+  <!-- left free-throw circle -->
+  <path d="M200,178 a72,72 0 0,1 0,144" stroke-dasharray="6 5"/>
+  <path d="M200,178 a72,72 0 0,0 0,144"/>
+  <!-- left restricted arc -->
+  <path d="M10,217 a40,40 0 0,1 0,66" stroke="rgba(80,130,200,0.12)"/>
+  <!-- left backboard + rim -->
+  <line x1="10" y1="232" x2="10" y2="268" stroke-width="4"/>
+  <!-- left three-point arc -->
+  <path d="M10,83 L160,83 a170,170 0 0,1 0,334 L10,417"/>
+  <!-- left corner three lines -->
+  <line x1="10" y1="83" x2="160" y2="83"/>
+  <line x1="10" y1="417" x2="160" y2="417"/>
+
+  <!-- RIGHT key (paint) -->
+  <rect x="740" y="178" width="190" height="144"/>
+  <!-- right free-throw circle -->
+  <path d="M740,178 a72,72 0 0,0 0,144" stroke-dasharray="6 5"/>
+  <path d="M740,178 a72,72 0 0,1 0,144"/>
+  <!-- right restricted arc -->
+  <path d="M930,217 a40,40 0 0,0 0,66" stroke="rgba(80,130,200,0.12)"/>
+  <!-- right backboard -->
+  <line x1="930" y1="232" x2="930" y2="268" stroke-width="4"/>
+  <!-- right three-point arc -->
+  <path d="M930,83 L780,83 a170,170 0 0,0 0,334 L930,417"/>
+  <!-- right corner three lines -->
+  <line x1="930" y1="83" x2="780" y2="83"/>
+  <line x1="930" y1="417" x2="780" y2="417"/>
+
+  <!-- lane tick marks left -->
+  <line x1="130" y1="178" x2="130" y2="166"/><line x1="160" y1="178" x2="160" y2="166"/>
+  <line x1="130" y1="322" x2="130" y2="334"/><line x1="160" y1="322" x2="160" y2="334"/>
+  <line x1="10" y1="214" x2="22" y2="214"/><line x1="10" y1="286" x2="22" y2="286"/>
+  <!-- lane tick marks right -->
+  <line x1="810" y1="178" x2="810" y2="166"/><line x1="780" y1="178" x2="780" y2="166"/>
+  <line x1="810" y1="322" x2="810" y2="334"/><line x1="780" y1="322" x2="780" y2="334"/>
+  <line x1="930" y1="214" x2="918" y2="214"/><line x1="930" y1="286" x2="918" y2="286"/>
+</svg>`;
+
+const COURT_URL = `url("data:image/svg+xml,${encodeURIComponent(COURT_SVG)}")`;
+
 export function Style() {
   return (<style>{`
     @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Oswald:wght@500;600;700&family=Archivo:wght@500;600;700;800&family=DM+Mono:wght@400;500&display=swap');
@@ -31,7 +83,7 @@ export function Style() {
 
 export const W = {
   root:{minHeight:"100vh",background:"radial-gradient(120% 80% at 50% -10%, #1a2742 0%, var(--wood) 45%, var(--wood-dk) 100%)",color:"var(--text)",fontFamily:"'Archivo',sans-serif",position:"relative",overflow:"hidden",display:"flex",flexDirection:"column"},
-  floor:{position:"fixed",inset:0,zIndex:0,pointerEvents:"none",backgroundImage:"radial-gradient(60% 50% at 15% 0%, var(--glowO), transparent 60%),radial-gradient(60% 50% at 85% 100%, var(--glowT), transparent 60%)",opacity:.4},
+  get floor(){return {position:"fixed",inset:0,zIndex:0,pointerEvents:"none",backgroundImage:`radial-gradient(60% 50% at 15% 0%, var(--glowO), transparent 60%),radial-gradient(60% 50% at 85% 100%, var(--glowT), transparent 60%),${COURT_URL}`,backgroundSize:"auto, auto, 95% auto",backgroundRepeat:"no-repeat",backgroundPosition:"center, center, center center",opacity:.9}},
   topbar:{position:"sticky",top:0,zIndex:10,display:"flex",alignItems:"center",gap:14,padding:"14px 28px",background:"linear-gradient(180deg, rgba(8,12,20,.95), rgba(8,12,20,.75))",backdropFilter:"blur(12px)",borderBottom:"1px solid var(--line)",boxShadow:"0 1px 0 var(--orange)"},
   brandFrom:{fontFamily:"'Oswald',sans-serif",fontWeight:600,letterSpacing:3,color:"var(--muted)",fontSize:14},
   brandDown:{fontFamily:"'Bungee',cursive",fontSize:22,color:"var(--orange)",marginLeft:2,textShadow:"0 0 18px var(--glowO)"},
