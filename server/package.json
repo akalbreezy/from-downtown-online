@@ -1,7 +1,6 @@
 {
   "name": "from-downtown-server",
   "version": "1.0.0",
-  "type": "module",
   "description": "Authoritative multiplayer server for FROM DOWNTOWN",
   "main": "src/index.js",
   "scripts": {

@@ -1,18 +1,10 @@
 // ============================================================
 //  balldontlie integration (FREE TIER)
-//  Free tier = teams, players, games endpoints; 5 req/min.
-//  Career/season STAT LINES are NOT on free tier ($9.99 plan),
-//  so stat values stay curated until you upgrade.
-//
-//  Strategy: fetch the player pool ONCE at server start, cache
-//  in memory, throttle to respect 5 req/min, and fall back to
-//  curated data on any error/rate-limit so the game never breaks.
 // ============================================================
 
 const BASE = "https://api.balldontlie.io/v1";
-const KEY = process.env.BALLDONTLIE_KEY || ""; // set in server env
+const KEY = process.env.BALLDONTLIE_KEY || "";
 
-// crude throttle: free tier allows ~5 requests/minute
 let _lastWindow = 0, _countInWindow = 0;
 async function throttle() {
   const now = Date.now();
@@ -39,10 +31,7 @@ async function api(path, params = {}) {
   return res.json();
 }
 
-// Pull a page of active players (paginated via cursor).
-// Returns array of { full_name, team } — used to VALIDATE names
-// and enrich the player pool. Career stats are NOT fetched (paid).
-export async function fetchPlayers({ maxPages = 3, perPage = 100 } = {}) {
+async function fetchPlayers({ maxPages = 3, perPage = 100 } = {}) {
   const out = [];
   let cursor = undefined;
   for (let i = 0; i < maxPages; i++) {
@@ -60,10 +49,8 @@ export async function fetchPlayers({ maxPages = 3, perPage = 100 } = {}) {
   return out;
 }
 
-// Build a Set of canonical real player names for validation.
-// Falls back to the provided curated names on any failure.
-export async function buildPlayerIndex(curatedNames = []) {
-  const index = new Map(); // lowercase -> canonical
+async function buildPlayerIndex(curatedNames = []) {
+  const index = new Map();
   curatedNames.forEach(n => index.set(n.toLowerCase(), n));
   if (!KEY) {
     console.log("[balldontlie] no API key set — using curated player pool only.");
@@ -80,4 +67,6 @@ export async function buildPlayerIndex(curatedNames = []) {
   }
 }
 
-export function hasKey() { return !!KEY; }
+function hasKey() { return !!KEY; }
+
+module.exports = { fetchPlayers, buildPlayerIndex, hasKey };

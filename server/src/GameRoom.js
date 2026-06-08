@@ -3,11 +3,9 @@
 //  Clients send INTENTS only; the server validates every move
 //  against the real data and broadcasts official state.
 // ============================================================
-import colyseuspkg from "colyseus";
-const { Room } = colyseuspkg;
-import schemapkg from "@colyseus/schema";
-const { Schema, MapSchema, ArraySchema, type } = schemapkg;
-import { LEAGUES, pairKey, median } from "./data.js";
+const { Room } = require("colyseus");
+const { Schema, MapSchema, ArraySchema, type } = require("@colyseus/schema");
+const { LEAGUES, pairKey, median } = require("./data.js");
 
 const CHAIN_BASE = 24, CHAIN_BLOCK = 12;
 const LIMITS = { skip: 2, hint: 1, block: 1 };
@@ -57,7 +55,7 @@ type("string")(State.prototype, "messageKind");
 type({ array: ChainLink })(State.prototype, "chain");
 type("int8")(State.prototype, "winner");       // seat or -1
 
-export class GameRoom extends Room {
+class GameRoom extends Room {
   onCreate(options) {
     this.maxClients = 2;
     this.setState(new State());
@@ -67,7 +65,7 @@ export class GameRoom extends Room {
     this.state.winner = -1;
     this.state.correct = -1;
     this.state.rounds = ROUNDS;
-    this._seats = [null, null];   // sessionId per seat
+    this._seats = [null, null];
     this._clockTimer = null;
 
     this.onMessage("setName", (client, { name }) => {
@@ -110,7 +108,7 @@ export class GameRoom extends Room {
     if (p) p.connected = false;
     try {
       if (consented) throw new Error("left");
-      await this.allowReconnection(client, 30); // 30s grace
+      await this.allowReconnection(client, 30);
       const rp = this.state.players.get(client.sessionId);
       if (rp) rp.connected = true;
     } catch (e) {
@@ -209,7 +207,7 @@ export class GameRoom extends Room {
     const pct = Math.abs(g - actual) / Math.max(actual, 1);
     const earned = Math.max(0, Math.round(100 - pct * 120));
     this.addScore(this.state.turn, earned);
-    this.state.correct = 1; // reuse as "revealed" flag
+    this.state.correct = 1;
     this.state.message = `Actual ${actual} · +${earned}`;
     this.state.messageKind = "info";
     this._lastEarned = earned; this._lastActual = actual;
@@ -218,18 +216,15 @@ export class GameRoom extends Room {
 
   advanceAfterReveal(client) {
     if (this.state.phase !== "reveal") return;
-    if (!this.isTurn(client)) return; // only the player who just went advances
+    if (!this.isTurn(client)) return;
     this.state.message = ""; this.state.correct = -1;
     if (this.state.turn === 0) { this.state.turn = 1; this.state.phase = "handoff"; }
     else if (this.state.round + 1 >= ROUNDS) { this.finishScored(); }
     else { this.state.round += 1; this.state.turn = 0; this.state.phase = "handoff"; }
     if (this.state.phase === "handoff") {
-      // load next question now so it's ready when they accept handoff
       if (this.state.mode === "trivia") this.loadTrivia(); else this.loadStat();
     }
   }
-  // client signals ready after handoff
-  onReadyHandoff() {}
 
   finishScored() {
     this.state.phase = "over";
@@ -279,7 +274,6 @@ export class GameRoom extends Room {
     if (!this.isTurn(client)) return;
     const L = LEAGUES[this.state.league];
     const key = String(name||"").toLowerCase().trim(); if (!key) return;
-    // canonical match
     let canon = null;
     for (const n of Object.keys(L.chain)) if (n.toLowerCase() === key) { canon = n; break; }
     const current = this.state.chain[this.state.chain.length - 1].name;
@@ -327,3 +321,5 @@ export class GameRoom extends Room {
   nameOf(seat){ let n=`Player ${seat+1}`; this.state.players.forEach(p=>{if(p.seat===seat)n=p.name;}); return n; }
   onDispose(){ this.stopClock(); }
 }
+
+module.exports = { GameRoom };

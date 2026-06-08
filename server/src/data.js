@@ -4,7 +4,7 @@
 //  before any public/competitive launch.
 // ============================================================
 
-export const NBA_LINKS = {
+const NBA_LINKS = {
   "LeBron James": ["Dwyane Wade","Chris Bosh","Kyrie Irving","Anthony Davis","Ray Allen","Russell Westbrook","Carmelo Anthony"],
   "Dwyane Wade": ["LeBron James","Chris Bosh","Ray Allen","Jimmy Butler","Goran Dragić"],
   "Chris Bosh": ["LeBron James","Dwyane Wade","Ray Allen"],
@@ -47,7 +47,7 @@ export const NBA_LINKS = {
   "DeMarcus Cousins": ["Anthony Davis"],
   "Tyrese Maxey": ["Joel Embiid","Ben Simmons","James Harden"],
 };
-export const NBA_TEAMS_RAW = {
+const NBA_TEAMS_RAW = {
   "LeBron James|Dwyane Wade":"Heat","Chris Bosh|LeBron James":"Heat","Chris Bosh|Dwyane Wade":"Heat","Ray Allen|LeBron James":"Heat","Dwyane Wade|Ray Allen":"Heat","Chris Bosh|Ray Allen":"Heat",
   "Kyrie Irving|LeBron James":"Cavaliers","Anthony Davis|LeBron James":"Lakers","LeBron James|Rajon Rondo":"Lakers","Anthony Davis|Rajon Rondo":"Lakers","Carmelo Anthony|LeBron James":"Lakers","LeBron James|Russell Westbrook":"Lakers",
   "Kevin Garnett|Ray Allen":"Celtics","Paul Pierce|Ray Allen":"Celtics","Kevin Garnett|Paul Pierce":"Celtics","Kevin Garnett|Rajon Rondo":"Celtics","Paul Pierce|Rajon Rondo":"Celtics","Rajon Rondo|Ray Allen":"Celtics",
@@ -65,7 +65,7 @@ export const NBA_TEAMS_RAW = {
   "Chris Paul|Devin Booker":"Suns","Chris Paul|Deandre Ayton":"Suns","Deandre Ayton|Devin Booker":"Suns","Anthony Davis|DeMarcus Cousins":"Pelicans",
 };
 
-export const NBL_LINKS = {
+const NBL_LINKS = {
   "Bryce Cotton": ["Damian Martin","Jesse Wagstaff","Greg Hire","Mitch Norton"],
   "Damian Martin": ["Bryce Cotton","Jesse Wagstaff","Greg Hire"],
   "Jesse Wagstaff": ["Bryce Cotton","Damian Martin","Greg Hire","Mitch Norton"],
@@ -80,13 +80,13 @@ export const NBL_LINKS = {
   "Brad Newley": ["Andrew Bogut","Kevin Lisch","Jae'Sean Tate"],
   "Jae'Sean Tate": ["Andrew Bogut","Kevin Lisch","Brad Newley"],
 };
-export const NBL_TEAMS_RAW = {
+const NBL_TEAMS_RAW = {
   "Bryce Cotton|Damian Martin":"Perth","Bryce Cotton|Jesse Wagstaff":"Perth","Bryce Cotton|Greg Hire":"Perth","Bryce Cotton|Mitch Norton":"Perth","Damian Martin|Jesse Wagstaff":"Perth","Damian Martin|Greg Hire":"Perth","Greg Hire|Jesse Wagstaff":"Perth","Jesse Wagstaff|Mitch Norton":"Perth",
   "Chris Goulding|Matthew Dellavedova":"Melbourne Utd","Chris Goulding|Jock Landale":"Melbourne Utd","Chris Goulding|Mitch McCarron":"Melbourne Utd","Jock Landale|Matthew Dellavedova":"Melbourne Utd","Matthew Dellavedova|Mitch McCarron":"Melbourne Utd","Jock Landale|Mitch McCarron":"Melbourne Utd",
   "Andrew Bogut|Kevin Lisch":"Sydney","Andrew Bogut|Brad Newley":"Sydney","Andrew Bogut|Jae'Sean Tate":"Sydney","Brad Newley|Kevin Lisch":"Sydney","Jae'Sean Tate|Kevin Lisch":"Sydney","Brad Newley|Jae'Sean Tate":"Sydney",
 };
 
-export const NBA_TRIVIA=[
+const NBA_TRIVIA=[
   {q:"Who holds the NBA all-time regular-season scoring record?",a:["Kareem Abdul-Jabbar","LeBron James","Karl Malone","Kobe Bryant"],correct:1},
   {q:"Which team won the most titles in the 1990s?",a:["Bulls","Lakers","Rockets","Spurs"],correct:0},
   {q:"Who has the most career assists in NBA history?",a:["John Stockton","Magic Johnson","Chris Paul","Jason Kidd"],correct:0},
@@ -98,7 +98,7 @@ export const NBA_TRIVIA=[
   {q:"Which team drafted Kobe Bryant before trading him?",a:["Hornets","Lakers","Clippers","Hawks"],correct:0},
   {q:"Who won Finals MVP in 2016?",a:["LeBron James","Kyrie Irving","Stephen Curry","Kevin Love"],correct:0},
 ];
-export const NBA_STAT=[
+const NBA_STAT=[
   {player:"Wilt Chamberlain",stat:"points in his record single game",value:100},
   {player:"Kobe Bryant",stat:"points in his 2nd-highest single game",value:81},
   {player:"LeBron James",stat:"career All-Star selections (approx)",value:20},
@@ -108,7 +108,7 @@ export const NBA_STAT=[
   {player:"Magic Johnson",stat:"career assists per game (approx)",value:11},
   {player:"Hakeem Olajuwon",stat:"career blocks (approx)",value:3830},
 ];
-export const NBA_DARTS=[
+const NBA_DARTS=[
   {id:"pts",label:"Career Points (thousands)",unit:"pts",db:[
     {name:"LeBron James",value:40},{name:"Kareem Abdul-Jabbar",value:38},{name:"Karl Malone",value:36},
     {name:"Kobe Bryant",value:33},{name:"Michael Jordan",value:32},{name:"Dirk Nowitzki",value:31},
@@ -120,7 +120,7 @@ export const NBA_DARTS=[
     {name:"Damian Lillard",value:2300},{name:"Vince Carter",value:2290},
   ]},
 ];
-export const NBL_TRIVIA=[
+const NBL_TRIVIA=[
   {q:"Which club has won the most NBL championships?",a:["Melbourne United","Perth Wildcats","Sydney Kings","Brisbane Bullets"],correct:1},
   {q:"Andrew Gaze played his club career mostly with?",a:["Sydney Kings","Melbourne Tigers","Adelaide 36ers","Cairns Taipans"],correct:1},
   {q:"LaMelo Ball played an NBL season with which club?",a:["Illawarra Hawks","Sydney Kings","NZ Breakers","SE Melbourne Phoenix"],correct:0},
@@ -130,7 +130,7 @@ export const NBL_TRIVIA=[
   {q:"How many teams contest the modern NBL (approx)?",a:["6","8","10","14"],correct:2},
   {q:"Andrew Bogut won an NBL MVP with which club?",a:["Sydney Kings","Perth","Melbourne","Brisbane"],correct:0},
 ];
-export const NBL_STAT=[
+const NBL_STAT=[
   {player:"Andrew Gaze",stat:"NBL MVP awards (approx)",value:7},
   {player:"Bryce Cotton",stat:"NBL MVP awards (approx)",value:4},
   {player:"Perth Wildcats",stat:"NBL championships (approx)",value:10},
@@ -138,7 +138,7 @@ export const NBL_STAT=[
   {player:"Sydney Kings",stat:"NBL championships (approx)",value:6},
   {player:"Tasmania JackJumpers",stat:"year of first title",value:2024},
 ];
-export const NBL_DARTS=[
+const NBL_DARTS=[
   {id:"titles",label:"Club NBL Championships",unit:"titles",db:[
     {name:"Perth Wildcats",value:10},{name:"Sydney Kings",value:6},{name:"Melbourne United",value:5},
     {name:"NZ Breakers",value:4},{name:"Adelaide 36ers",value:4},{name:"Brisbane Bullets",value:3},
@@ -150,17 +150,18 @@ export const NBL_DARTS=[
   ]},
 ];
 
-// ---- derived helpers ----
-export function pairKey(a,b){ return [a,b].sort().join("|"); }
-export function buildChain(links){
+function pairKey(a,b){ return [a,b].sort().join("|"); }
+function buildChain(links){
   const g={}; const add=(a,b)=>{(g[a]=g[a]||new Set()).add(b);};
   Object.entries(links).forEach(([p,ms])=>ms.forEach(m=>{add(p,m);add(m,p);}));
   return g;
 }
-export function buildTeams(raw){ const m={}; Object.entries(raw).forEach(([k,t])=>{const[a,b]=k.split("|");m[pairKey(a,b)]=t;}); return m; }
-export function median(ns){ const s=[...ns].sort((a,b)=>a-b); const m=Math.floor(s.length/2); return s.length%2?s[m]:Math.round((s[m-1]+s[m])/2); }
+function buildTeams(raw){ const m={}; Object.entries(raw).forEach(([k,t])=>{const[a,b]=k.split("|");m[pairKey(a,b)]=t;}); return m; }
+function median(ns){ const s=[...ns].sort((a,b)=>a-b); const m=Math.floor(s.length/2); return s.length%2?s[m]:Math.round((s[m-1]+s[m])/2); }
 
-export const LEAGUES = {
+const LEAGUES = {
   nba: { name:"NBA", chain:buildChain(NBA_LINKS), teams:buildTeams(NBA_TEAMS_RAW), trivia:NBA_TRIVIA, stat:NBA_STAT, darts:NBA_DARTS },
   nbl: { name:"NBL", chain:buildChain(NBL_LINKS), teams:buildTeams(NBL_TEAMS_RAW), trivia:NBL_TRIVIA, stat:NBL_STAT, darts:NBL_DARTS },
 };
+
+module.exports = { LEAGUES, pairKey, median };
