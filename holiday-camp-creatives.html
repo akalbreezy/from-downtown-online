@@ -34,10 +34,8 @@
   .teal { color: #2BC4B4; }
   .muted { color: rgba(255,255,255,0.4); }
 
-  /* —— CSS logo mark (replaces the original embedded base64 logo) —— */
-  .mark { width: 54px; height: 54px; border-radius: 50%; border: 1.5px solid #2BC4B4; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
-  .mark::before { content: ""; position: absolute; inset: 7px; border-radius: 50%; border: 1px solid rgba(43,196,180,0.35); }
-  .mark span { font-size: 17px; font-weight: 700; letter-spacing: 0.06em; color: #2BC4B4; }
+  /* —— HCA shield monogram (SVG recreation of the brand logo) —— */
+  .mark { width: 52px; height: 58px; flex-shrink: 0; display: block; overflow: visible; }
 
   .wordmark { font-size: 15px; color: #2BC4B4; letter-spacing: 0.18em; font-weight: 700; text-transform: uppercase; line-height: 1.4; }
 
@@ -54,6 +52,17 @@
 </style>
 </head>
 <body>
+
+<!-- Reusable HCA shield monogram (recreated from the brand logo as scalable vector) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="hca-shield" viewBox="0 0 100 112">
+    <path d="M20 5 L80 5 L91 16 L91 60 L50 105 L9 60 L9 16 Z"
+          fill="none" stroke="#2BC4B4" stroke-width="3.5" stroke-linejoin="round"/>
+    <text x="50" y="70" text-anchor="middle"
+          font-family="'Barlow Condensed', Arial Narrow, sans-serif" font-weight="700"
+          font-size="52" letter-spacing="-2" fill="#ffffff">HCA</text>
+  </symbol>
+</svg>
 
 <p class="page-title">Hardwood Culture Academy</p>
 <p class="page-sub">Holiday Camp Creatives · Screenshot each card at full size</p>
@@ -75,7 +84,7 @@
         <div style="position:absolute;inset:0;padding:36px;display:flex;flex-direction:column;justify-content:space-between">
           <div style="display:flex;justify-content:space-between;align-items:flex-start">
             <div class="wordmark">HARDWOOD<br>CULTURE<br>ACADEMY</div>
-            <div class="mark"><span>HCA</span></div>
+            <svg class="mark"><use href="#hca-shield"/></svg>
           </div>
           <div>
             <div style="font-size:13px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:14px">Summer 2026 · Registration Open</div>
@@ -102,7 +111,7 @@
         <div class="brk" style="bottom:0;right:0;width:56px;height:5px"></div>
         <div style="position:absolute;inset:0;padding:30px;display:flex;flex-direction:column;justify-content:space-between">
           <div style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
-            <div class="mark"><span>HCA</span></div>
+            <svg class="mark"><use href="#hca-shield"/></svg>
             <div class="wordmark" style="font-size:12px;line-height:1.5">HARDWOOD CULTURE ACADEMY</div>
           </div>
           <div style="text-align:center">
@@ -132,7 +141,7 @@
         <div style="position:absolute;inset:0;padding:34px;display:flex;flex-direction:column;justify-content:space-between">
           <div style="display:flex;justify-content:space-between;align-items:flex-start">
             <div class="wordmark" style="font-size:13px;line-height:1.4">HARDWOOD<br>CULTURE ACADEMY</div>
-            <div class="mark" style="width:46px;height:46px"><span style="font-size:14px">HCA</span></div>
+            <svg class="mark" style="width:44px;height:49px"><use href="#hca-shield"/></svg>
           </div>
           <div>
             <div style="font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:10px">Summer 2026 · Registration open</div>
@@ -168,7 +177,7 @@
         <div style="position:absolute;inset:0;padding:36px;display:flex;flex-direction:column;justify-content:space-between">
           <div style="display:flex;justify-content:space-between;align-items:flex-start">
             <div class="wordmark">HARDWOOD<br>CULTURE<br>ACADEMY</div>
-            <div class="mark"><span>HCA</span></div>
+            <svg class="mark"><use href="#hca-shield"/></svg>
           </div>
           <div>
             <div style="display:inline-block;border:1px solid #2BC4B4;color:#2BC4B4;font-size:13px;letter-spacing:0.22em;text-transform:uppercase;padding:6px 12px;margin-bottom:18px">Camp 1 · Juniors</div>
@@ -195,7 +204,7 @@
         <div class="brk" style="bottom:0;right:0;width:56px;height:5px"></div>
         <div style="position:absolute;inset:0;padding:30px;display:flex;flex-direction:column;justify-content:space-between">
           <div style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
-            <div class="mark"><span>HCA</span></div>
+            <svg class="mark"><use href="#hca-shield"/></svg>
             <div style="border:1px solid #2BC4B4;color:#2BC4B4;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;padding:5px 11px">Camp 1 · Juniors</div>
           </div>
           <div style="text-align:center">
@@ -260,7 +269,7 @@
         <div style="position:absolute;inset:0;padding:36px;display:flex;flex-direction:column;justify-content:space-between">
           <div style="display:flex;justify-content:space-between;align-items:flex-start">
             <div class="wordmark">HARDWOOD<br>CULTURE<br>ACADEMY</div>
-            <div class="mark"><span>HCA</span></div>
+            <svg class="mark"><use href="#hca-shield"/></svg>
           </div>
           <div>
             <div style="display:inline-block;border:1px solid #2BC4B4;color:#2BC4B4;font-size:13px;letter-spacing:0.22em;text-transform:uppercase;padding:6px 12px;margin-bottom:18px">Camp 2 · Elite</div>
@@ -287,7 +296,7 @@
         <div class="brk" style="bottom:0;right:0;width:56px;height:5px"></div>
         <div style="position:absolute;inset:0;padding:30px;display:flex;flex-direction:column;justify-content:space-between">
           <div style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
-            <div class="mark"><span>HCA</span></div>
+            <svg class="mark"><use href="#hca-shield"/></svg>
             <div style="border:1px solid #2BC4B4;color:#2BC4B4;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;padding:5px 11px">Camp 2 · Elite</div>
           </div>
           <div style="text-align:center">

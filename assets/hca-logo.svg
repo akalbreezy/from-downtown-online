@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 460" fill="none">
+  <!-- Shield -->
+  <path d="M64 16 L256 16 L291 52 L291 196 L160 336 L29 196 L29 52 Z"
+        fill="none" stroke="#2BC4B4" stroke-width="9" stroke-linejoin="round"/>
+  <!-- HCA monogram -->
+  <text x="160" y="216" text-anchor="middle"
+        font-family="'Barlow Condensed', Arial Narrow, sans-serif" font-weight="700"
+        font-size="170" letter-spacing="-6" fill="#ffffff">HCA</text>
+  <!-- Wordmark -->
+  <text x="160" y="392" text-anchor="middle"
+        font-family="'Barlow Condensed', Arial Narrow, sans-serif" font-weight="700"
+        font-size="40" letter-spacing="1" fill="#ffffff">HARDWOOD CULTURE</text>
+  <text x="160" y="430" text-anchor="middle"
+        font-family="'Barlow Condensed', Arial Narrow, sans-serif" font-weight="700"
+        font-size="22" letter-spacing="14" fill="#ffffff">ACADEMY</text>
+</svg>
